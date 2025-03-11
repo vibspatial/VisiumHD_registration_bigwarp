@@ -1,9 +1,9 @@
 # Bigwarp correction of Visium HD registration
-
-This document describes how to improve the registration of Visium HD barcode positions using Bigwarp.
+ tissue_positions
+This document describes how to improve the registration of Visium HD barcode positions using Bigwarp. The method overwrites the x- and y-coordinates (columns `pxl_col_in_fullres` and `pxl_row_in_fullres`, respectively) of the tissue_positions.parquet file (see [Space Ranger output files](https://www.10xgenomics.com/support/software/space-ranger/latest/analysis/outputs/spatial-outputs)) with more accurately registered coordinates from a Bigwarp transformation (either affine or nonlinear). This method can be used on tissue_positions files for all Visium HD bin sizes.
 
 ## Prerequisites
-
+### Software
 We used the following version of Fiji/ImageJ:
 
 - **ImageJ**: 1.54f
@@ -13,6 +13,11 @@ We used the following version of Fiji/ImageJ:
 
 You can download a zip archive with this exact combination of Fiji and BigWarp [here](https://objectstor.vib.be/s00-spatial.catalyst-team/sw/fiji-bigwarp/fiji-win64-bigwarp-9.1.3.zip). After downloading, unpack the zip file in any folder you like.
 
+### Files
+- **Space Ranger output files**. These files should have been provided to you by the VIB Spatial Catalyst (accesible via the Single Cell Core cloud share link in the `COUNTS` folder).
+- **High resolution H&E**. This image should have been provided to you by the VIB Spatial Catalyst (accesible via the Single Cell Core cloud share link in the `IMAGES` folder).
+- **Transcript image**. This is an image where every pixel corresponds to a 2x2um spot with array_col and array_row as xy-coordinates (i.e. the coordinates of the spatial barcodes on the Visium HD capture slide) and the intensity of every pixel corresponds to either the total number of UMIs or total number of genes detected for this spot. Generally, we use the log1p-transformation of the total number of genes since this tends to show the tissue structure the best. A set of these images should have been provided to you by the VIB Spatial Catalyst.
+
 ## Creating a Bigwarp dataset
 
 To create a dataset for use in BigWarp, follow these steps:
@@ -20,7 +25,7 @@ To create a dataset for use in BigWarp, follow these steps:
 1. Open the Fiji version specified in the prerequisites above.
 2. Navigate to:  
    `Plugins > BigDataViewer-Playground > BDVDataset > Create BDV Dataset [Bio-Formats]`
-3. In the dialog that appears, click `Add files...` and provide the paths to the **high-resolution H&E image** and the **transcript image**. The latter is an image where every pixel corresponds to a 2x2um spot with array_col and array_row as xy-coordinates (i.e. the coordinates of the spatial barcodes on the Visium HD capture slide) and the intensity of every pixel corresponds to either the total number of UMIs or total number of genes detected for this spot. Generally, we use the log1p-transformation of the total number of genes since this tends to show the tissue structure the best. The transcript image should ideally contain clear tissue structures or even nuclei that can be used to place landmarks in both the H&E and transcript image.
+3. In the dialog that appears, click `Add files...` and provide the paths to the **high-resolution H&E image** and the **transcript image**. The H&E and transcript image should ideally contain clear tissue structures or even nuclei that can be used to place landmarks in both images.
 
 **Important**: Make sure to set the `Physical units of the dataset` to `MICROMETER` and the `Plane Origin Convention` to `TOP LEFT`!
 
