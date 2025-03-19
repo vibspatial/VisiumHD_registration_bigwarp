@@ -16,7 +16,7 @@ You can download a zip archive with this exact combination of Fiji and BigWarp [
 ### Files
 - **Space Ranger output files**. These files should have been provided to you by the VIB Spatial Catalyst (accesible via the Single Cell Core cloud share link in the `COUNTS` folder).
 - **High resolution H&E**. This image should have been provided to you by the VIB Spatial Catalyst (accesible via the Single Cell Core cloud share link in the `IMAGES` folder).
-- **Transcript image**. This is an image where every pixel corresponds to a 2x2um spot with array_col and array_row as xy-coordinates (i.e. the coordinates of the spatial barcodes on the Visium HD capture slide) and the intensity of every pixel corresponds to either the total number of UMIs or total number of genes detected for this spot. Generally, we use the log1p-transformation of the total number of genes since this tends to show the tissue structure the best. A set of these images should have been provided to you by the VIB Spatial Catalyst.
+- **transcript density image**. This is an image where every pixel corresponds to a 2x2um spot with array_col and array_row as xy-coordinates (i.e. the coordinates of the spatial barcodes on the Visium HD capture slide) and the intensity of every pixel corresponds to either the total number of UMIs or total number of genes detected for this spot. Generally, we use the log1p-transformation of the total number of genes since this tends to show the tissue structure the best. A set of these images should have been provided to you by the VIB Spatial Catalyst.
 
 ## Creating a Bigwarp dataset
 
@@ -25,7 +25,7 @@ To create a dataset for use in BigWarp, follow these steps:
 1. Open the Fiji version specified in the prerequisites above.
 2. Navigate to:  
    `Plugins > BigDataViewer-Playground > BDVDataset > Create BDV Dataset [Bio-Formats]`
-3. In the dialog that appears, click `Add files...` and provide the paths to the **high-resolution H&E image** and the **transcript image**. The H&E and transcript image should ideally contain clear tissue structures or even nuclei that can be used to place landmarks in both images.
+3. In the dialog that appears, click `Add files...` and provide the paths to the **high-resolution H&E image** and the **transcript density image**. The H&E and transcript density image should ideally contain clear tissue structures or even nuclei that can be used to place landmarks in both images.
 
 **Important**: Make sure to set the `Physical units of the dataset` to `MICROMETER` and the `Plane Origin Convention` to `TOP LEFT`!
 
@@ -36,7 +36,7 @@ To create a dataset for use in BigWarp, follow these steps:
 To launch BigWarp, navigate to:  
 `Plugins > BigDataViewer-Playground > Sources > Register > Launch BigWarp`
 
-In the dialog that appears, set the high-resolution H&E image as the `Fixed Source` and the transcript image as the `Moving Source`. The fixed image will serve as the reference coordinate space to which the moving image will be transformed.
+In the dialog that appears, set the high-resolution H&E image as the `Fixed Source` and the transcript density image as the `Moving Source`. The fixed image will serve as the reference coordinate space to which the moving image will be transformed.
 
 ![bdv](docs/launch_bigwarp.png)
 
@@ -44,7 +44,7 @@ In the dialog that appears, set the high-resolution H&E image as the `Fixed Sour
 
 To register the moving image to the fixed image, you will need to place landmarks until you get good alignment. Note that this may take approximately 100 landmarks or more (depending on your tissue).  Below, we will explain some general guidelines and tips, but for a full list of navigation and editing commands, press `F1` or read the [BigWarp documentation](https://imagej.net/plugins/bigwarp).
 
-- Press `P` to open the source card for editing source visualization modes, color, brightness, and contrast. If necessary, adjust the brightness and contrast appropriately. It is recommended to set the color of the transcript image to white. Note that you'll need to adjust these settings for both the `BigWarp moving image` and the `BigWarp fixed image` windows separately.
+- Press `P` to open the source card for editing source visualization modes, color, brightness, and contrast. If necessary, adjust the brightness and contrast appropriately. It is recommended to set the color of the transcript density image to white. Note that you'll need to adjust these settings for both the `BigWarp moving image` and the `BigWarp fixed image` windows separately.
 - Using left-click and drag, you can rotate one of the images until they are in the same orientation. You can use right-click and drag to pan (move) the image and the mouse wheel to zoom in and out until you find corresponding landmarks.
 - Enter landmark mode by pressing the `space bar`. You can now left-click a cell (or another recognizable feature) in one of the images and subsequently left-click the corresponding cell/feature in the other image. A landmark will now have been added in the `Landmarks` window. It is also possible to delete landmarks by right-clicking them in the Landmarks window. When you want move around, make sure to disable landmark mode by pressing the space bar again. When placing landmarks, try to be as precise as possible to get good quality registration.
 - You will need at least 4 landmarks before you can warp the moving image onto the fixed image and assess the registration quality. Click on the title bar of the fixed or moving image and press `F` to display a fusion of both images. Press `T` to warp the moving image onto the fixed image. You may need to place many more landmarks to obtain a nice registration, but after the first 4 landmarks, you can more easily find the corresponding regions by clicking the title bar of one of the images and pressing `Q` to display the region corresponding to the window of the other image.
