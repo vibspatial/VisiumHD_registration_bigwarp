@@ -16,7 +16,7 @@ You can download a zip archive with this exact combination of Fiji and BigWarp [
 ### Files
 - **Space Ranger output files**. These files should have been provided to you by the VIB Spatial Catalyst (accesible via the Single Cell Core cloud share link in the `COUNTS` folder).
 - **High resolution H&E**. This image should have been provided to you by the VIB Spatial Catalyst (accesible via the Single Cell Core cloud share link in the `IMAGES` folder).
-- **transcript density image**. This is an image where every pixel corresponds to a 2x2um spot with array_col and array_row as xy-coordinates (i.e. the coordinates of the spatial barcodes on the Visium HD capture slide) and the intensity of every pixel corresponds to either the total number of UMIs or total number of genes detected for this spot. Generally, we use the log1p-transformation of the total number of genes since this tends to show the tissue structure the best. A set of these images should have been provided to you by the VIB Spatial Catalyst.
+- **Transcript density image**. This is an image where every pixel corresponds to a 2x2um spot with array_col and array_row as xy-coordinates (i.e. the coordinates of the spatial barcodes on the Visium HD capture slide) and the intensity of every pixel corresponds to either the total number of UMIs or total number of genes detected for this spot. Generally, we use the log1p-transformation of the total number of genes since this tends to show the tissue structure the best. A set of these images should have been provided to you by the VIB Spatial Catalyst.
 
 ## Creating a Bigwarp dataset
 
